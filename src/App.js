@@ -12,15 +12,12 @@ constructor(){
 
   render(){
     return (
-      <div>
-        <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-     <p>Hi {this.state.name}</p>
-     <button onClick={()=>{
-      this.setState({name: "Home"})
-     }}>click</button>
-      </header>
-      </div>
+      <div className="App">
+        {this.state.mosters.map((monster) => {
+          return (
+            <div key={monster.id}>
+              <h1>{monster.name}</h1>
+            </div>
     )
   }
 }
