@@ -1,21 +1,41 @@
-import { Component } from "react";
+import { useState, useEffect } from "react";
 import "./App.css";
 import CardList from "./componets/card-list/card-list";
 import SearchBox from "./componets/search-box/search-box";
 ////////////
 
-function App(){
-  return(
+function App() {
+  console.log("render");
+  const [searchFild, setSearchFild] = useState("");
+  const [monsters, setMonsters] = useState([]);
+
+  // console.log(searchFild);
+
+  useEffect(() => {
+    fetch(`https://jsonplaceholder.typicode.com/users`)
+      .then((response) => response.json())
+      .then((users) => setMonsters(users));
+  }, []);
+
+  const onSearchChange = (event) => {
+    const searchFildString = event.target.value.toLowerCase();
+    setSearchFild(searchFildString);
+  };
+  const filteredMonsters = monsters.filter((monster) => {
+    return monster.name.toLowerCase().includes(searchFild);
+  });
+  return (
     <div className="App">
-    {/* Search Box input */}
-    <SearchBox filter={onSearchChange} />
-    {/* Map function to monsters API */}
-    <CardList monsters={filteredMonsters} />
-  </div>
-  )
+      <h1 className="app-title">Monsters Rolodex</h1>
+      {/* Search Box input */}
+      <SearchBox filter={onSearchChange} />
+      {/* Map function to monsters API */}
+      <CardList monsters={filteredMonsters} />
+    </div>
+  );
 }
 
-////////  Class Components  ////////////////
+/////////////////  Class Components  ///////////////////////
 // class App extends Component {
 //   constructor() {
 //     super();
