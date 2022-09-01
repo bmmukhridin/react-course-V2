@@ -5,11 +5,11 @@ import SearchBox from "./componets/search-box/search-box";
 ////////////
 
 function App() {
-  console.log("render");
+  
   const [searchFild, setSearchFild] = useState("");
   const [monsters, setMonsters] = useState([]);
 
-  // console.log(searchFild);
+ 
 
   useEffect(() => {
     fetch(`https://jsonplaceholder.typicode.com/users`)
